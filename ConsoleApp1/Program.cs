@@ -8,12 +8,15 @@ namespace ConsoleApp1
 {
     class Program
     {
-        private string thing;
+        private int thing;
         public void Setter(string s)
         {
-            thing = s;
+            //thing = s;
+            //Console.WriteLine(s);
+            s = s.Replace("\n", String.Empty);
+            thing = Int32.Parse(s);
         }
-        public string Getter()
+        public int Getter()
         {
             return thing;
         }
@@ -21,12 +24,24 @@ namespace ConsoleApp1
         {
             Console.WriteLine("Hello World!");
 
+            Random rnd = new Random();
+            int num = rnd.Next(10);
+            Console.WriteLine(num);
+
             Program p = new Program();
             string r;
             r = Console.ReadLine();
-
             p.Setter(r);
-            Console.WriteLine(p.Getter());
+
+            if (p.Getter() == num)
+            {
+                Console.WriteLine("Congratulations!");
+            }else
+            {
+                Console.WriteLine("Boo :(");
+            }
+
+            //Console.WriteLine(p.Getter());
             Console.ReadKey();
         }
     }
