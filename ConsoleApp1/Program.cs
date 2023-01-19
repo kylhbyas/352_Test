@@ -9,12 +9,9 @@ namespace ConsoleApp1
     class Program
     {
         private int thing;
-        public void Setter(string s)
+        public void Setter(string guess)
         {
-            //thing = s;
-            //Console.WriteLine(s);
-            s = s.Replace("\n", String.Empty);
-            thing = Int32.Parse(s);
+            thing = Int32.Parse(guess);
         }
         public int Getter()
         {
@@ -22,26 +19,45 @@ namespace ConsoleApp1
         }
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Lower Bound, inclusive:");
+            string LB = Console.ReadLine();
+            int lowerBound = Int32.Parse(LB);
 
+            Console.WriteLine("Upper Bound, exclusive:");
+            string UB = Console.ReadLine();
+            int upperBound = Int32.Parse(UB);
+
+            Console.WriteLine("I am thinking of a number between " + lowerBound + " and " + upperBound);
             Random rnd = new Random();
-            int num = rnd.Next(10);
+            int num = rnd.Next(lowerBound, upperBound);
             Console.WriteLine(num);
 
             Program p = new Program();
-            string r;
-            r = Console.ReadLine();
-            p.Setter(r);
+            string guess = Console.ReadLine();
+            p.Setter(guess);
 
-            if (p.Getter() == num)
+            int counter = 1;
+
+            while (p.Getter() != num)
             {
-                Console.WriteLine("Congratulations!");
-            }else
-            {
-                Console.WriteLine("Boo :(");
+                if (p.Getter() < num)
+                {
+                    Console.WriteLine("Too Low");
+                }
+                else if (p.Getter() > num)
+                {
+                    Console.WriteLine("Too High");
+                }
+                else if (p.Getter() == num)
+                {
+                    Console.WriteLine("Congratulations!");
+                }
+                counter++;
+                Console.WriteLine("Guess again:");
+                guess = Console.ReadLine();
+                p.Setter(guess);
             }
-
-            //Console.WriteLine(p.Getter());
+            Console.WriteLine("# of guesses = " + counter);
             Console.ReadKey();
         }
     }
