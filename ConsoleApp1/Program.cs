@@ -11,8 +11,6 @@ namespace ConsoleApp1
         private int thing;
         public void Setter(string guess)
         {
-            //thing = s;
-            //Console.WriteLine(s);
             thing = Int32.Parse(guess);
         }
         public int Getter()
@@ -21,11 +19,17 @@ namespace ConsoleApp1
         }
         static void Main(string[] args)
         {
-            //Console.WriteLine("Hello World!");
+            Console.WriteLine("Lower Bound, inclusive:");
+            string LB = Console.ReadLine();
+            int lowerBound = Int32.Parse(LB);
 
-            Console.WriteLine("I am thinking of a number between 0 and 100");
+            Console.WriteLine("Upper Bound, exclusive:");
+            string UB = Console.ReadLine();
+            int upperBound = Int32.Parse(UB);
+
+            Console.WriteLine("I am thinking of a number between " + lowerBound + " and " + upperBound);
             Random rnd = new Random();
-            int num = rnd.Next(100);
+            int num = rnd.Next(lowerBound, upperBound);
             Console.WriteLine(num);
 
             Program p = new Program();
@@ -53,8 +57,7 @@ namespace ConsoleApp1
                 guess = Console.ReadLine();
                 p.Setter(guess);
             }
-            Console.WriteLine("# of guesses = "+counter);
-            //Console.WriteLine(p.Getter());
+            Console.WriteLine("# of guesses = " + counter);
             Console.ReadKey();
         }
     }
